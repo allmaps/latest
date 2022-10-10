@@ -69,7 +69,7 @@
     if (!containsNaN) {
       return d
     } else {
-      console.log(polygon.coordinates[0], bounds, scale)
+      // console.log(polygon.coordinates[0], bounds, scale)
       // console.log(JSON.stringify(polygon))
       return undefined
     }
@@ -121,7 +121,7 @@
       >
     </h1>
     <p>250 maps, {errorCount} with errors</p>
-    <!-- Add li with config:
+    <!-- Add config:
     - switch between pixel mask and geo mask
     - sort!
     - hide errors
