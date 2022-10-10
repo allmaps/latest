@@ -8,7 +8,7 @@
   import { getProperties } from '$lib/properties.js'
 
   import type { Map } from '@allmaps/annotation'
-  import type { Polygon, Position } from 'geojson'
+  import type { Polygon } from 'geojson'
 
   type DisplayMap = {
     map: Map
@@ -19,13 +19,18 @@
       editor?: string
     }
     properties?: {
-      hostname?: string,
+      hostname?: string
       timeAgo?: string
+      areaStr?: string
     }
   }
 
   let maps: Map[] = []
   let displayMaps: DisplayMap[] = []
+  let errorCount = 0
+  $: {
+    errorCount = displayMaps.filter((map) => map.error).length
+  }
 
   const mapsUrl = 'https://api.allmaps.org/maps'
 
@@ -94,7 +99,7 @@
           error = 'pixel mask should have more than 2 points'
         }
       } else {
-        error = 'map should have more than 2 GCPs'
+        error = 'map should have more than 2 gcps'
       }
 
       return {
@@ -102,24 +107,48 @@
         error,
         polygon,
         urls: getUrls(map),
-        properties: getProperties(map)
+        properties: getProperties(map, polygon)
       }
     })
   })
 </script>
 
 <ol class="masks">
+  <li class="header">
+    <h1>
+      The last 250 maps edited with <a href="https://editor.allmaps.org"
+        >Allmaps Editor</a
+      >
+    </h1>
+    <p>250 maps, {errorCount} with errors</p>
+    <!-- Add li with config:
+    - switch between pixel mask and geo mask
+    - sort!
+    - hide errors
+  -->
+  </li>
+
   {#each displayMaps as { map, error, polygon, urls, properties }, index}
-    <li class:error>
+    <li class:error class:mask={true}>
       <div class="properties">
         <div class="hostname">{properties?.hostname}</div>
         <div class="timeago">updated {properties?.timeAgo}</div>
-        <!-- TODO: add square km. -->
-        <div class="error">
-          {#if error}
-          {error}
-          {/if}
+        <div>
+          <a href={urls?.editor}>editor</a> / <a href={urls?.viewer}>viewer</a>
         </div>
+        <div class="grow" />
+        <!-- TODO: add square km. -->
+        {#if error}
+          <div class="error">
+            {error}
+          </div>
+        {:else}
+          <div class="numbers">
+            <span>{map.gcps.length} gcps</span>
+            <span>{map.pixelMask.length} mask pts</span>
+            <span>{properties?.areaStr}</span>
+          </div>
+        {/if}
       </div>
       {#if error}
         <a href={urls?.editor}>
@@ -151,7 +180,7 @@
 
     --grid-layout-gap: 5px;
     --grid-column-count: 5;
-    --grid-item--min-width: 180px;
+    --grid-item--min-width: 200px;
 
     gap: var(--grid-layout-gap);
     margin: var(--grid-layout-gap);
@@ -172,6 +201,14 @@
     );
   }
 
+  .masks .header {
+    padding: var(--grid-layout-gap);
+  }
+
+  .masks h1 {
+    margin: 0;
+  }
+
   .masks li {
     position: relative;
     aspect-ratio: 1 / 1;
@@ -179,7 +216,7 @@
     overflow: hidden;
   }
 
-  .masks li > * {
+  .masks li.mask > * {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -197,27 +234,58 @@
     background-color: rgb(254, 94, 96);
   }
 
+  .masks li.header {
+    background-color: rgba(240, 240, 240, 1);
+  }
+
   .properties {
     box-sizing: border-box;
     z-index: 100;
-    font-size: 50%;
+    /* font-size: 50%; */
     display: grid;
     gap: var(--grid-layout-gap);
     padding: var(--grid-layout-gap);
     grid-template-columns: auto;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto 1fr auto;
     pointer-events: none;
   }
 
-  .properties .hostname, .properties .error {
+  .numbers {
+    display: grid;
+    gap: var(--grid-layout-gap);
+    grid-template-columns: auto auto auto;
+  }
+
+  .numbers > * {
+    align-self: center;
+  }
+
+  a,
+  a:visited {
+    color: black;
+  }
+
+  .properties > * {
+    pointer-events: all;
+  }
+
+  .properties .grow {
+    pointer-events: none;
+  }
+
+  .properties .hostname {
+    word-break: break-all;
+  }
+
+  .properties .hostname,
+  .properties .error {
     font-weight: bold;
   }
 
   .masks svg {
-    z-index: -1;
     fill: none;
     stroke: white;
-    stroke-width: 2px;
+    stroke-width: 2.2px;
     stroke-linecap: round;
     stroke-linejoin: round;
   }

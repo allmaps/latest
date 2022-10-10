@@ -9,7 +9,7 @@ export function getUrls(map: Map) {
   return {
     viewer: `https://viewer.allmaps.org/#data=data%3Atext%2Fx-url%2C${encodeURIComponent(
       annotationUrl
-    )}`,
-    editor: `https://editor.allmaps.org/#/mask?url=${imageUri}&image=${imageId}&map=${mapId}`
+    )}&map=${mapId}`,
+    editor: `https://editor.allmaps.org/#/mask?url=${imageUri}/info.json&image=${imageId}&map=${mapId}`
   }
 }

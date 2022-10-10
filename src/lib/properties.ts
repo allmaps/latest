@@ -1,4 +1,7 @@
+import turfArea from '@turf/area'
+
 import type { Map } from '@allmaps/annotation'
+import type { Polygon } from 'geojson'
 
 const formatter = new Intl.RelativeTimeFormat(undefined, {
   numeric: 'auto'
@@ -31,12 +34,31 @@ function formatTimeAgo(date: Date) {
   }
 }
 
-export function getProperties(map: Map) {
+export function getProperties(map: Map, polygon?: Polygon) {
   const { hostname } = new URL(map.image.uri)
   const timeAgo = formatTimeAgo(new Date(map.updatedAt as string))
 
+  let areaStr
+  if (polygon) {
+    let area = turfArea(polygon) / (1000 * 1000)
+
+    let maximumFractionDigits = 0
+    if (area < 1) {
+      maximumFractionDigits = 3
+    } else if (area < 10) {
+      maximumFractionDigits = 2
+    } else if (area < 20) {
+      maximumFractionDigits = 1
+    }
+
+    areaStr = `${new Intl.NumberFormat('en-US', {
+      maximumFractionDigits
+    }).format(area)} km²`
+  }
+
   return {
     hostname,
-    timeAgo
+    timeAgo,
+    areaStr
   }
 }

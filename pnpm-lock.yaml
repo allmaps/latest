@@ -5,6 +5,7 @@ specifiers:
   '@allmaps/transform': 1.0.0-beta.4
   '@sveltejs/adapter-static': next
   '@sveltejs/kit': next
+  '@turf/area': ^6.5.0
   '@types/d3-geo': ^3.0.2
   '@types/geojson': ^7946.0.10
   '@typescript-eslint/eslint-plugin': ^5.27.0
@@ -24,6 +25,7 @@ specifiers:
 
 dependencies:
   '@allmaps/transform': 1.0.0-beta.4
+  '@turf/area': 6.5.0
   d3-geo: 3.0.1
 
 devDependencies:
@@ -222,6 +224,13 @@ packages:
       - supports-color
     dev: true
 
+  /@turf/area/6.5.0:
+    resolution: {integrity: sha512-xCZdiuojokLbQ+29qR6qoMD89hv+JAgWjLrwSEWL+3JV8IXKeNFl6XkEJz9HGkVpnXvQKJoRz4/liT+8ZZ5Jyg==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+      '@turf/meta': 6.5.0
+    dev: false
+
   /@turf/bearing/6.5.0:
     resolution: {integrity: sha512-dxINYhIEMzgDOztyMZc20I7ssYVNEpSv04VbMo5YPQsqa80KO3TFvbuCahMsCAW5z8Tncc8dwBlEFrmRjJG33A==}
     dependencies:
@@ -249,6 +258,12 @@ packages:
 
   /@turf/invariant/6.5.0:
     resolution: {integrity: sha512-Wv8PRNCtPD31UVbdJE/KVAWKe7l6US+lJItRR/HOEW3eh+U/JwRCSUl/KZ7bmjM/C+zLNoreM2TU6OoLACs4eg==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+    dev: false
+
+  /@turf/meta/6.5.0:
+    resolution: {integrity: sha512-RrArvtsV0vdsCBegoBtOalgdSOfkBrTJ07VkpiCnq/491W67hnMWmDu7e6Ztw0C3WldRYTXkg3SumfdzZxLBHA==}
     dependencies:
       '@turf/helpers': 6.5.0
     dev: false
