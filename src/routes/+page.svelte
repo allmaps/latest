@@ -256,13 +256,11 @@
 
   .numbers {
     display: grid;
+    justify-items: center;
+    align-items: center;
     gap: var(--grid-layout-gap);
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     font-size: 80%;
-  }
-
-  .numbers > * {
-    align-self: center;
   }
 
   a,
@@ -285,6 +283,10 @@
   .properties .hostname,
   .properties .error {
     font-weight: bold;
+  }
+
+  .properties .error {
+    text-align: center;
   }
 
   .masks svg {
