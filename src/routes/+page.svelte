@@ -180,7 +180,7 @@
 
     --grid-layout-gap: 5px;
     --grid-column-count: 5;
-    --grid-item--min-width: 200px;
+    --grid-item--min-width: 180px;
 
     gap: var(--grid-layout-gap);
     margin: var(--grid-layout-gap);
@@ -254,6 +254,7 @@
     display: grid;
     gap: var(--grid-layout-gap);
     grid-template-columns: auto auto auto;
+    font-size: 80%;
   }
 
   .numbers > * {
