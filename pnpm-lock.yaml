@@ -6,6 +6,7 @@ specifiers:
   '@sveltejs/adapter-static': next
   '@sveltejs/kit': next
   '@turf/area': ^6.5.0
+  '@turf/rewind': ^6.5.0
   '@types/d3-geo': ^3.0.2
   '@types/geojson': ^7946.0.10
   '@typescript-eslint/eslint-plugin': ^5.27.0
@@ -26,12 +27,13 @@ specifiers:
 dependencies:
   '@allmaps/transform': 1.0.0-beta.4
   '@turf/area': 6.5.0
+  '@turf/rewind': 6.5.0
   d3-geo: 3.0.1
 
 devDependencies:
   '@allmaps/annotation': 1.0.0-beta.8
   '@sveltejs/adapter-static': 1.0.0-next.44
-  '@sveltejs/kit': 1.0.0-next.511_svelte@3.50.1+vite@3.1.7
+  '@sveltejs/kit': 1.0.0-next.512_svelte@3.50.1+vite@3.1.7
   '@types/d3-geo': 3.0.2
   '@types/geojson': 7946.0.10
   '@typescript-eslint/eslint-plugin': 5.39.0_cfd7h3iktziq6hcwahu2qxhjhy
@@ -173,8 +175,8 @@ packages:
     resolution: {integrity: sha512-qBtkmIMYGiDv5r2F3AfSG0ABHZim2NC+1PL2YVCa+QYz8IVCm1E/wGQ0RW4KVrANZ3MZk8y52PPajx+8/fwmNw==}
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.511_svelte@3.50.1+vite@3.1.7:
-    resolution: {integrity: sha512-A/fxd4qHWDD07Mjo6qEEEfsBEkoj5C4/dPSzx6xPUoWmPvRPhU8t+P0oMc8BOn5YHOhPDq3coH8bmafbh73zKg==}
+  /@sveltejs/kit/1.0.0-next.512_svelte@3.50.1+vite@3.1.7:
+    resolution: {integrity: sha512-/KywzSMXdNxYGujJfdlAbLgV9m0TSSKqC8XluZ46M6oPAM1fUsjfBBtukU/Vx3hP7ldR8d/vpKX3amENAMw50g==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -238,6 +240,19 @@ packages:
       '@turf/invariant': 6.5.0
     dev: false
 
+  /@turf/boolean-clockwise/6.5.0:
+    resolution: {integrity: sha512-45+C7LC5RMbRWrxh3Z0Eihsc8db1VGBO5d9BLTOAwU4jR6SgsunTfRWR16X7JUwIDYlCVEmnjcXJNi/kIU3VIw==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+      '@turf/invariant': 6.5.0
+    dev: false
+
+  /@turf/clone/6.5.0:
+    resolution: {integrity: sha512-mzVtTFj/QycXOn6ig+annKrM6ZlimreKYz6f/GSERytOpgzodbQyOgkfwru100O1KQhhjSudKK4DsQ0oyi9cTw==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+    dev: false
+
   /@turf/destination/6.5.0:
     resolution: {integrity: sha512-4cnWQlNC8d1tItOz9B4pmJdWpXqS0vEvv65bI/Pj/genJnsL7evI0/Xw42RvEGROS481MPiU80xzvwxEvhQiMQ==}
     dependencies:
@@ -275,6 +290,16 @@ packages:
       '@turf/destination': 6.5.0
       '@turf/distance': 6.5.0
       '@turf/helpers': 6.5.0
+    dev: false
+
+  /@turf/rewind/6.5.0:
+    resolution: {integrity: sha512-IoUAMcHWotBWYwSYuYypw/LlqZmO+wcBpn8ysrBNbazkFNkLf3btSDZMkKJO/bvOzl55imr/Xj4fi3DdsLsbzQ==}
+    dependencies:
+      '@turf/boolean-clockwise': 6.5.0
+      '@turf/clone': 6.5.0
+      '@turf/helpers': 6.5.0
+      '@turf/invariant': 6.5.0
+      '@turf/meta': 6.5.0
     dev: false
 
   /@types/cookie/0.5.1:

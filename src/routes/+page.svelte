@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
+  import turfRewind from '@turf/rewind'
   import { createTransformer, polygonToWorld } from '@allmaps/transform'
   import { geoProjection, geoPath } from 'd3-geo'
 
@@ -69,8 +70,6 @@
     if (!containsNaN) {
       return d
     } else {
-      // console.log(polygon.coordinates[0], bounds, scale)
-      // console.log(JSON.stringify(polygon))
       return undefined
     }
   }
@@ -87,7 +86,12 @@
           try {
             const transformer = createTransformer(map.gcps)
             const pixelMask = [...map.pixelMask, map.pixelMask[0]]
+
             polygon = polygonToWorld(transformer, pixelMask) as Polygon
+
+            // d3-geo requires the opposite polygon winding order of
+            // the GoeJSON spec: https://github.com/d3/d3-geo
+            turfRewind(polygon, { mutate: true, reverse: true })
           } catch (err) {
             let message = 'Unknown Error'
             if (err instanceof Error) {
