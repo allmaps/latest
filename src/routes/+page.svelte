@@ -198,7 +198,6 @@
   .masks {
     list-style-type: none;
     display: grid;
-    width: 100%;
 
     --grid-layout-gap: 5px;
     --grid-column-count: 5;
