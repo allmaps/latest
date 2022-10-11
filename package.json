@@ -1,5 +1,5 @@
 {
-	"name": "@allmaps/masks",
+	"name": "@allmaps/latest",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -37,5 +37,8 @@
 		"@turf/area": "^6.5.0",
 		"@turf/rewind": "^6.5.0",
 		"d3-geo": "^3.0.1"
-	}
+	},
+  "engines": {
+    "node" : ">=16.14"
+  }
 }
