@@ -198,6 +198,7 @@
   .masks {
     list-style-type: none;
     display: grid;
+    width: 100%;
 
     --grid-layout-gap: 5px;
     --grid-column-count: 5;
@@ -261,6 +262,34 @@
 
   .masks li:nth-child(odd) {
     background-color: rgb(255, 199, 66);
+  }
+
+  @media only screen and (min-width: 365px) and (max-width: 549px) {
+    .masks li:nth-child(4n + 0),
+    .masks li:nth-child(4n + 1) {
+      background-color: rgb(99, 216, 230);
+    }
+
+    .masks li:nth-child(4n + 2),
+    .masks li:nth-child(4n + 3) {
+      background-color: rgb(255, 199, 66);
+    }
+  }
+
+  @media only screen and (min-width: 735px) and (max-width: 919px) {
+    .masks li:nth-child(8n + 1),
+    .masks li:nth-child(8n + 3),
+    .masks li:nth-child(8n + 6),
+    .masks li:nth-child(8n + 0) {
+      background-color: rgb(99, 216, 230);
+    }
+
+    .masks li:nth-child(8n + 2),
+    .masks li:nth-child(8n + 4),
+    .masks li:nth-child(8n + 5),
+    .masks li:nth-child(8n + 7) {
+      background-color: rgb(255, 199, 66);
+    }
   }
 
   .masks li.error {
