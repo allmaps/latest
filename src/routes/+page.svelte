@@ -131,11 +131,13 @@
 <ol class="masks">
   <li class="header">
     <h1>
-      The latest 250 maps edited with <a href="https://editor.allmaps.org"
+      The latest maps edited with <a href="https://editor.allmaps.org"
         >Allmaps Editor</a
       >
     </h1>
-    <p>250 maps, {errorCount} with errors</p>
+    {#if displayMaps.length}
+      <p>{displayMaps.length} maps, {errorCount} with errors</p>
+    {/if}
     <!-- Add config:
     - switch between pixel mask and geo mask
     - sort!
@@ -241,6 +243,18 @@
     height: 100%;
   }
 
+  .masks svg {
+    fill: none;
+    stroke: white;
+    stroke-width: 2.2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .masks li.error {
+    stroke-opacity: 0.25;
+  }
+
   .masks li:nth-child(even) {
     background-color: rgb(99, 216, 230);
   }
@@ -306,17 +320,5 @@
 
   .properties .error {
     text-align: center;
-  }
-
-  .masks svg {
-    fill: none;
-    stroke: white;
-    stroke-width: 2.2px;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .masks li.error {
-    stroke-opacity: 0.25;
   }
 </style>
