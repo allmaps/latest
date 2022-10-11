@@ -28,6 +28,13 @@
 
   let maps: Map[] = []
   let displayMaps: DisplayMap[] = []
+
+  let loadingSteps: number[] = []
+  let loadingInterval = setInterval(() => {
+    loadingSteps.push(loadingSteps.length)
+    loadingSteps = loadingSteps
+  }, 200)
+
   let errorCount = 0
   $: {
     errorCount = displayMaps.filter((map) => map.error).length
@@ -77,6 +84,10 @@
   onMount(async () => {
     const response = await fetch(mapsUrl)
     maps = await response.json()
+
+    clearInterval(loadingInterval)
+    loadingSteps = []
+
     displayMaps = maps.map((map) => {
       let error
       let polygon
@@ -120,7 +131,7 @@
 <ol class="masks">
   <li class="header">
     <h1>
-      The last 250 maps edited with <a href="https://editor.allmaps.org"
+      The latest 250 maps edited with <a href="https://editor.allmaps.org"
         >Allmaps Editor</a
       >
     </h1>
@@ -131,6 +142,10 @@
     - hide errors
   -->
   </li>
+
+  {#each loadingSteps as index}
+    <li class="loading-step" style:scale={0.9 - 0.02 * index} />
+  {/each}
 
   {#each displayMaps as { map, error, polygon, urls, properties }, index}
     <li class:error class:mask={true}>
@@ -240,6 +255,10 @@
 
   .masks li.header {
     background-color: rgba(240, 240, 240, 1);
+  }
+
+  .masks li.loading-step {
+    background-color: rgba(230, 230, 230, 1);
   }
 
   .properties {
