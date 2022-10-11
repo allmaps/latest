@@ -13,10 +13,10 @@ const config = {
       fallback: null,
       precompress: false
     })
-  },
-  paths: {
-    base: '/masks'
   }
+  // paths: {
+  //   base: '/'
+  // }
 }
 
 export default config
